@@ -1,0 +1,29 @@
+﻿<Window x:Name="AddItemWindow" x:Class="LPLManager.AddItem"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LPLManager"
+        mc:Ignorable="d"
+        Title="Add Item" Height="280" Width="385" ResizeMode="NoResize" Background="#FFF1F1F1" WindowStartupLocation="CenterOwner"  Loaded="Window_Loaded">
+    <Grid>
+        <Label Content="Path" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="7,21,0,0" FontSize="10.667" FontFamily="Microsoft Sans Serif"></Label>
+        <Label x:Name="vldPath" Content="!" Foreground="Red" ToolTip="Path is mandatory" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="65,18,0,0" FontFamily="Microsoft Sans Serif" Visibility="Hidden" FontWeight="Bold"/>
+        <TextBox x:Name="txtPath" VerticalAlignment="Top" Padding="3" HorizontalAlignment="Left" Margin="78,21,0,0" Width="246" Height="22" FontFamily="Microsoft Sans Serif" TextAlignment="Left" TextWrapping="NoWrap" TextChanged="txt_TextChanged"/>
+        <Button x:Name="btnSetPath" Content="..." VerticalAlignment="Top" HorizontalAlignment="Left" Margin="330,21,0,0" Width="24" Height="22" Click="btnSetPath_Click" />
+        <Label Content="Label" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="7,51,0,0" FontSize="10.667" FontFamily="Microsoft Sans Serif"></Label>
+        <Label x:Name="vldLabel" Content="!" Foreground="Red" ToolTip="Label is mandatory" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="65,48,0,0" FontFamily="Microsoft Sans Serif" Visibility="Hidden" FontWeight="Bold"/>
+        <TextBox x:Name="txtLabel" VerticalAlignment="Top" Padding="3" HorizontalAlignment="Left" Margin="78,51,0,0" Width="246" Height="22" FontFamily="Microsoft Sans Serif" TextChanged="txt_TextChanged" ></TextBox>
+        <Label Content="Core Path" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="7,81,0,0" FontSize="10.667" FontFamily="Microsoft Sans Serif"></Label>
+        <TextBox x:Name="txtCorePath" VerticalAlignment="Top" Padding="3" HorizontalAlignment="Left" Margin="78,81,0,0" Width="245" Height="22" FontFamily="Microsoft Sans Serif"></TextBox>
+        <Button x:Name="btnSetCorePath" Content="..." VerticalAlignment="Top" HorizontalAlignment="Left" Margin="330,81,0,0" Width="24" Height="22" Click="btnSetCorePath_Click" ></Button>
+        <Label Content="Core Name" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="7,111,0,0" FontSize="10.667" FontFamily="Microsoft Sans Serif"></Label>
+        <TextBox x:Name="txtCoreName" VerticalAlignment="Top" Padding="3" HorizontalAlignment="Left" Margin="78,111,0,0" Width="245" Height="22" FontFamily="Microsoft Sans Serif"></TextBox>
+        <Label Content="Crc32" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="7,141,0,0" FontSize="10.667" FontFamily="Microsoft Sans Serif"></Label>
+        <TextBox x:Name="txtCrc32" VerticalAlignment="Top" Padding="3" HorizontalAlignment="Left" Margin="78,141,0,0" Width="245" Height="22" FontFamily="Microsoft Sans Serif"></TextBox>
+        <Label Content="Db Name" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="7,171,0,0" FontSize="10.667" FontFamily="Microsoft Sans Serif"></Label>
+        <TextBox x:Name="txtDbName" VerticalAlignment="Top" Padding="3" HorizontalAlignment="Left" Margin="78,171,0,0" Width="245" Height="22" FontFamily="Microsoft Sans Serif" IsEnabled="False"></TextBox>
+        <Button x:Name="btnAddItem" Content="Add Item" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="78,208,0,0" Width="62" Click="btnAddItem_Click" ></Button>
+        <Button x:Name="btnCancel" Content="Cancel" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="262,208,0,0" Width="62" Click="btnCancel_Click" ></Button>
+    </Grid>
+</Window>
