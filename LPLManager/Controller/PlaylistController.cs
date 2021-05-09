@@ -23,6 +23,8 @@ namespace LPLManager.Controller
 
         public Item CurrentItem { get; set; }
 
+        public bool isCustom { get; set; }
+
         public bool isAdded { get; set; }
 
         public bool isImageEdit { get; set; }
@@ -59,6 +61,7 @@ namespace LPLManager.Controller
             _model.Playlists.Add(plName, FileJson<Root>.Read(path));
             _model.Playlists[plName].items.ForEach(i => i.id = idTemp++);
             CurrentDatabase = plName;
+            isCustom = true;
         }
 
         public bool CompareCurrententItem(Item modified)

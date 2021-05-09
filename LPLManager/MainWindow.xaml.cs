@@ -78,6 +78,7 @@ namespace LPLManager
             btnEdit.IsEnabled = false;
             btnRemove.IsEnabled = false;
             btnAddItem.IsEnabled = false;
+            Controller.isCustom = false;
         }
 
         private void cmbPlaylist_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -162,25 +163,25 @@ namespace LPLManager
 
             if (picItem.Source != null)
                 picItem.Source = null;
-
-            if (File.Exists(pathImage))
-            {
-                picItem.Source = FileManagers.FileManager.LoadImage(pathImage);
-            }
-            else
-            {
-                int width = 128;
-                int height = width;
-                int stride = width / 8;
-                byte[] pixels = new byte[height * stride];
-                picItem.Source = BitmapSource.Create(
-                                         width, height,
-                                         96, 96,
-                                         PixelFormats.Indexed1,
-                                         new BitmapPalette(new List<Color>() { Colors.LightGray }),
-                                         pixels,
-                                         stride);
-            }
+            if (Controller.isCustom == false)
+                if (File.Exists(pathImage))
+                {
+                    picItem.Source = FileManagers.FileManager.LoadImage(pathImage);
+                }
+                else
+                {
+                    int width = 128;
+                    int height = width;
+                    int stride = width / 8;
+                    byte[] pixels = new byte[height * stride];
+                    picItem.Source = BitmapSource.Create(
+                                             width, height,
+                                             96, 96,
+                                             PixelFormats.Indexed1,
+                                             new BitmapPalette(new List<Color>() { Colors.LightGray }),
+                                             pixels,
+                                             stride);
+                }
             picItem.EndInit();
         }
 
@@ -243,7 +244,7 @@ namespace LPLManager
             {
                 bool check = true;
 
-                if(string.IsNullOrEmpty(txtPath.Text))
+                if (string.IsNullOrEmpty(txtPath.Text))
                 {
                     vldPath.Visibility = Visibility.Visible;
                     check = false;
@@ -262,7 +263,7 @@ namespace LPLManager
 
                     if (result == MessageBoxResult.Yes && currentItem != null)
                     {
-                        if (picItem.Source != null && Controller.isImageEdit)
+                        if (Controller.isCustom == false && picItem.Source != null && Controller.isImageEdit)
                         {
                             Controller.SaveImage(picItem.Source as BitmapImage, currentItem.label, txtLabel.Text);
                         }
@@ -407,6 +408,7 @@ namespace LPLManager
                     ResetControls();
                     Controller.LoadCustomDatabase(openFileDialogImage.FileName);
                     LoadPlaylist();
+                    cmbPlaylist.SelectedIndex = 0;
                 }
                 catch (Exception ex)
                 {
