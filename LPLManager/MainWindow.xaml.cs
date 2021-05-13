@@ -268,7 +268,10 @@ namespace LPLManager
                             Controller.SaveImage(picItem.Source as BitmapImage, currentItem.label, txtLabel.Text);
                         }
                         saveInfo(currentItem);
-                        FileJson<Root>.Write(@"playlists\" + (cmbPlaylist.SelectedItem as string) + ".lpl", Controller.Model.Playlists[Controller.CurrentDatabase]);
+                        if(Controller.isCustom)
+                            FileJson<Root>.Write(Controller.customPath, Controller.Model.Playlists[Controller.CurrentDatabase]);
+                        else
+                            FileJson<Root>.Write(@"playlists\" + (cmbPlaylist.SelectedItem as string) + ".lpl", Controller.Model.Playlists[Controller.CurrentDatabase]);
                         MessageBox.Show("Playlist updated");
                         btnEdit.IsEnabled = false;
                         Controller.CurrentIndex = listItems.SelectedIndex;
@@ -318,9 +321,15 @@ namespace LPLManager
                         deleteItem = MessageBox.Show("Do you wanna remove item too?", "Remove item", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes;
 
                     Controller.RemoveItem(currentItem, Controller.CurrentDatabase, removeFile: deleteItem);
-                    FileJson<Root>.Write(@"playlists\" + (cmbPlaylist.SelectedItem as string) + ".lpl", Controller.Model.Playlists[Controller.CurrentDatabase]);
+                    if(Controller.isCustom)
+                        FileJson<Root>.Write(Controller.customPath, Controller.Model.Playlists[Controller.CurrentDatabase]);
+                    else
+                        FileJson<Root>.Write(@"playlists\" + (cmbPlaylist.SelectedItem as string) + ".lpl", Controller.Model.Playlists[Controller.CurrentDatabase]);
                     MessageBox.Show("Element removed");
-                    Controller.ReloadDatabase(cmbPlaylist.SelectedItem as string);
+                    if (Controller.isCustom)
+                        Controller.LoadCustomDatabase(Controller.customPath);
+                    else
+                        Controller.ReloadDatabase(cmbPlaylist.SelectedItem as string);
                     cmbPlaylist_SelectionChanged(sender, e as SelectionChangedEventArgs);
                 }
             }

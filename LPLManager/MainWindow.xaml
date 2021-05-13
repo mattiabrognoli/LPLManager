@@ -12,7 +12,6 @@
                 <MenuItem Header="_File">
                     <!--TODO-->
                     <!--<MenuItem Header="_New" />
-                    <MenuItem Header="_Open" />
                     <MenuItem Header="_Save" />-->
                     <MenuItem Header="_Open" Click="MenuItemOpen_Click" />
                     <Separator />

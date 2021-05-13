@@ -25,6 +25,8 @@ namespace LPLManager.Controller
 
         public bool isCustom { get; set; }
 
+        public string customPath { get; set; }
+
         public bool isAdded { get; set; }
 
         public bool isImageEdit { get; set; }
@@ -62,6 +64,7 @@ namespace LPLManager.Controller
             _model.Playlists[plName].items.ForEach(i => i.id = idTemp++);
             CurrentDatabase = plName;
             isCustom = true;
+            customPath = path;
         }
 
         public bool CompareCurrententItem(Item modified)
@@ -95,10 +98,11 @@ namespace LPLManager.Controller
             _model.Playlists[database].items = _model.Playlists[database].items.Where(c => c != itemToRemove).ToList();
         }
 
-        public void AddItem(Item itemToAdd, string database)
+        public void AddItem(Item itemToAdd, string database, bool isCustom = false)
         {
             _model.Playlists[database].items = _model.Playlists[database].items.Append(itemToAdd).OrderBy(i => i.label).ToList();
-            FileJson<Root>.Write(@"playlists\" + database + ".lpl", _model.Playlists[database]);
+            string pathItem = isCustom ? customPath : "playlists\\" + database + ".lpl";
+            FileJson<Root>.Write(pathItem, _model.Playlists[database]);
             isAdded = true;
         }
 
@@ -111,5 +115,6 @@ namespace LPLManager.Controller
             FileManagers.FileManager.SaveImage(pic, @"thumbnails\" + CurrentDatabase + @"\Named_Boxarts\" + newName + ".png");
             isImageEdit = false;
         }
+
     }
 }
