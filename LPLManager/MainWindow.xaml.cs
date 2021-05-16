@@ -275,7 +275,10 @@ namespace LPLManager
                         MessageBox.Show("Playlist updated");
                         btnEdit.IsEnabled = false;
                         Controller.CurrentIndex = listItems.SelectedIndex;
-                        Controller.ReloadDatabase(cmbPlaylist.SelectedItem as string);
+                        if (Controller.isCustom)
+                            Controller.LoadCustomDatabase(Controller.customPath);
+                        else
+                            Controller.ReloadDatabase(cmbPlaylist.SelectedItem as string);
                         cmbPlaylist_SelectionChanged(sender, e as SelectionChangedEventArgs);
                     }
                 }
@@ -426,6 +429,11 @@ namespace LPLManager
                 }
             }
 
+        }
+
+        private void MenuItemReset_Click(object sender, RoutedEventArgs e)
+        {
+            Loading();
         }
     }
 }

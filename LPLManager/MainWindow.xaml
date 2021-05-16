@@ -14,6 +14,7 @@
                     <!--<MenuItem Header="_New" />
                     <MenuItem Header="_Save" />-->
                     <MenuItem Header="_Open" Click="MenuItemOpen_Click" />
+                    <MenuItem Header="_Reset" Click="MenuItemReset_Click" />
                     <Separator />
                     <MenuItem Header="_Exit" Click="MenuItemExit_Click" />
                 </MenuItem>
@@ -22,7 +23,7 @@
                 </MenuItem>
             </Menu>
         </DockPanel>
-        <ComboBox x:Name="cmbPlaylist" Width="248" HorizontalAlignment="Left" Margin="0,31,0,0" Height="20" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" FontFamily="Microsoft Sans Serif" FontSize="10.667" SelectionChanged="cmbPlaylist_SelectionChanged">
+        <ComboBox x:Name="cmbPlaylist" Width="248" HorizontalAlignment="Left" Margin="0,31,0,0" Height="20" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" FontFamily="Microsoft Sans Serif" FontSize="10.667" Padding="4" SelectionChanged="cmbPlaylist_SelectionChanged">
             <ComboBox.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
