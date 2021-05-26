@@ -1,4 +1,5 @@
 ﻿using LPLManager.Controller;
+using LPLManager.Dialog;
 using LPLManager.FileManager;
 using LPLManager.Object;
 using Microsoft.Win32;
@@ -268,7 +269,7 @@ namespace LPLManager
                             Controller.SaveImage(picItem.Source as BitmapImage, currentItem.label, txtLabel.Text);
                         }
                         saveInfo(currentItem);
-                        if(Controller.isCustom)
+                        if (Controller.isCustom)
                             FileJson<Root>.Write(Controller.customPath, Controller.Model.Playlists[Controller.CurrentDatabase]);
                         else
                             FileJson<Root>.Write(@"playlists\" + (cmbPlaylist.SelectedItem as string) + ".lpl", Controller.Model.Playlists[Controller.CurrentDatabase]);
@@ -324,7 +325,7 @@ namespace LPLManager
                         deleteItem = MessageBox.Show("Do you wanna remove item too?", "Remove item", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes;
 
                     Controller.RemoveItem(currentItem, Controller.CurrentDatabase, removeFile: deleteItem);
-                    if(Controller.isCustom)
+                    if (Controller.isCustom)
                         FileJson<Root>.Write(Controller.customPath, Controller.Model.Playlists[Controller.CurrentDatabase]);
                     else
                         FileJson<Root>.Write(@"playlists\" + (cmbPlaylist.SelectedItem as string) + ".lpl", Controller.Model.Playlists[Controller.CurrentDatabase]);
@@ -434,6 +435,19 @@ namespace LPLManager
         private void MenuItemReset_Click(object sender, RoutedEventArgs e)
         {
             Loading();
+        }
+
+        private void MenuItemNew_Click(object sender, RoutedEventArgs e)
+        {
+            AddPlaylist addUI = new AddPlaylist();
+            addUI.Owner = this;
+            addUI.Controller = Controller;
+            addUI.ShowDialog();
+            if (Controller.isAdded)
+            {
+                Controller.isAdded = false;
+                Loading();
+            }
         }
     }
 }
