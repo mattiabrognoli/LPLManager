@@ -45,5 +45,10 @@ namespace LPLManager.Dialog
         {
             Close();
         }
+
+        private void cmbPlaylists_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            btnOk.IsEnabled = !string.IsNullOrEmpty((sender as ComboBox).SelectedItem as string);
+        }
     }
 }
