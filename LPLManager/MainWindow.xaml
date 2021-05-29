@@ -19,6 +19,7 @@
                     <MenuItem Header="_Exit" Click="MenuItemExit_Click" />
                 </MenuItem>
                 <MenuItem Header="_Help">
+                    <MenuItem Header="_Help" Click="MenuItemHelp_Click" />
                     <MenuItem Header="_About" Click="MenuItemAbout_Click" />
                 </MenuItem>
             </Menu>
@@ -33,7 +34,7 @@
                 </TransformGroup>
             </ComboBox.RenderTransform>
         </ComboBox>
-        <Button x:Name="btnReset" Content="Reset" HorizontalAlignment="Left" Margin="290,31,0,0" VerticalAlignment="Top" Height="20" Width="60" Click="btnReset_Click"/>
+        <Button x:Name="btnRemoveLPL" Content="Remove" HorizontalAlignment="Left" Margin="290,31,0,0" VerticalAlignment="Top" Height="20" Width="60" IsEnabled="False" Click="btnRemoveLPL_Click"/>
         <ListBox x:Name="listItems" Width="350" HorizontalAlignment="Left" Height="373" VerticalAlignment="Top" FontFamily="Microsoft Sans Serif" FontSize="10.667" Margin="0,51,0,0" SelectionChanged="listItems_SelectionChanged" IsSynchronizedWithCurrentItem="False"/>
         <Label Content="Path" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="390,51,0,0" FontSize="10.667" FontFamily="Microsoft Sans Serif"></Label>
         <Label x:Name="vldPath" Content="!" Foreground="Red" ToolTip="Path is mandatory" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="454,49,0,0" FontFamily="Microsoft Sans Serif" Visibility="Hidden" FontWeight="Bold"/>

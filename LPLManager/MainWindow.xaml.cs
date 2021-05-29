@@ -7,16 +7,11 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 
 namespace LPLManager
 {
@@ -87,7 +82,7 @@ namespace LPLManager
             ClearItem();
             if (!string.IsNullOrEmpty(cmbPlaylist.SelectedItem as string))
             {
-                btnAddItem.IsEnabled = true;
+                btnAddItem.IsEnabled = btnRemoveLPL.IsEnabled = true;
                 Controller.CurrentDatabase = cmbPlaylist.SelectedItem as string;
                 listItems.BeginInit();
                 listItems.ItemsSource = Controller.Model.Playlists[cmbPlaylist.SelectedItem as string].items;
@@ -99,16 +94,24 @@ namespace LPLManager
             }
             else
             {
-                btnAddItem.IsEnabled = false;
+                btnAddItem.IsEnabled = btnRemoveLPL.IsEnabled = false;
                 listItems.BeginInit();
                 listItems.ItemsSource = new List<Item>();
                 listItems.EndInit();
             }
         }
 
-        private void btnReset_Click(object sender, RoutedEventArgs e)
+        private void btnRemoveLPL_Click(object sender, RoutedEventArgs e)
         {
-            Loading();
+            MessageBoxResult result = MessageBox.Show("Are you sure to remove the playlist?", "Remove Playlist", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                string path = Controller.isCustom ? Controller.customPath : "playlists\\" + Controller.CurrentDatabase + ".lpl";
+                FileManagers.FileManager.DeleteFile(path);
+                MessageBox.Show("Playlist Removed!");
+               Loading();
+            }
         }
 
         private void ChangeEnabledTextBox(bool choice)
@@ -448,6 +451,11 @@ namespace LPLManager
                 Controller.isAdded = false;
                 Loading();
             }
+        }
+
+        private void MenuItemHelp_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(this, "Put the exe file in the retroarch root and start it.\nThen you can add, edit and remove LPL retroarch playlists.");
         }
     }
 }

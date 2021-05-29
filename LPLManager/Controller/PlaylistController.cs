@@ -1,13 +1,8 @@
-﻿using LPLManager.FileManagers;
-using LPLManager.Model;
+﻿using LPLManager.Model;
 using LPLManager.Object;
-using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using LPLManager.FileManager;
 using System.Windows.Media.Imaging;
 
@@ -107,8 +102,10 @@ namespace LPLManager.Controller
             isAdded = true;
         }
 
-        public void AddNewPlaylist(string namePlaylist)
+        public bool AddNewPlaylist(string namePlaylist)
         {
+            if (File.Exists("playlists\\" + namePlaylist + ".lpl"))
+                return false;
             Root playlist = new Root()
             {
                 version = "1.4",
@@ -121,6 +118,7 @@ namespace LPLManager.Controller
             };
             FileJson<Root>.Write("playlists\\" + namePlaylist + ".lpl", playlist);
             isAdded = true;
+            return true;
         }
 
         public void SaveImage(BitmapImage pic, string oldName, string newName)
@@ -143,6 +141,41 @@ namespace LPLManager.Controller
                 "Atari - Jaguar",
                 "Atari - Lynx",
                 "Atari - ST",
+                "Bandai - WonderSwan Color",
+                "Bandai - WonderSwan",
+                "Bomberman Game Clone",
+                "Casio - Loopy",
+                "Casio - PV-1000",
+                "Cave Story",
+                "Coleco - ColecoVision",
+                "Commodore - 64",
+                "Commodore - Plus-4",
+                "Commodore - VIC-20",
+                "DOOM",
+                "DOS",
+                "Dinothawr",
+                "Emerson - Arcadia 2001",
+                "Entex - Adventure Vision",
+                "Epoch - Super Cassette Vision",
+                "FB Alpha - Arcade Games",
+                "Fairchild - Channel F",
+                "Funtech - Super Acan",
+                "GCE - Vectrex",
+                "GamePark - GP32",
+                "Handheld Electronic Game",
+                "Hartung - Game Master",
+                "Lutro",
+                "MAME",
+                "Magnavox - Odyssey2",
+                "Mattel - Intellivision",
+                "Microsoft - MSX",
+                "Microsoft - MSX",
+                "Microsoft - Xbox 360",
+                "Microsoft - Xbox",
+                "NEC - PC Engine - TurboGrafx 16",
+                "NEC - PC Engine CD - TurboGrafx-CD",
+                "NEC - PC Engine SuperGrafx",
+                "NEC - PC-FX",
                 "Nintendo - Family Computer Disk System",
                 "Nintendo - Game Boy Advance",
                 "Nintendo - Game Boy Color",
@@ -151,17 +184,47 @@ namespace LPLManager.Controller
                 "Nintendo - Nintendo 3DS",
                 "Nintendo - Nintendo 64",
                 "Nintendo - Nintendo 64DD",
+                "Nintendo - Nintendo DS",
+                "Nintendo - Nintendo DSi",
+                "Nintendo - Nintendo Entertainment System",
+                "Nintendo - Pokemon Mini",
+                "Nintendo - Satellaview",
+                "Nintendo - Sufami Turbo",
+                "Nintendo - Super Nintendo Entertainment System",
+                "Nintendo - Virtual Boy",
+                "Nintendo - Wii U",
+                "Nintendo - Wii",
+                "Philips - Videopac+",
+                "Quake1",
+                "RCA - Studio II",
+                "SNK - Neo Geo CD",
+                "SNK - Neo Geo Pocket Color",
+                "SNK - Neo Geo Pocket",
+                "SNK - Neo Geo",
+                "ScummVM",
+                "Sega - 32X",
                 "Sega - Dreamcast",
                 "Sega - Game Gear",
                 "Sega - Master System - Mark III",
                 "Sega - Mega Drive - Genesis",
                 "Sega - Mega-CD - Sega CD",
+                "Sega - PICO",
+                "Sega - SG-1000",
                 "Sega - Saturn",
+                "Sinclair - ZX 81",
+                "Sinclair - ZX Spectrum",
                 "Sony - PlayStation 2",
                 "Sony - PlayStation 3",
+                "Sony - PlayStation 4",
+                "Sony - PlayStation Portable Vita",
                 "Sony - PlayStation Portable",
                 "Sony - PlayStation",
-                "The 3DO Company - 3DO"
+                "The 3DO Company - 3DO",
+                "Tiger - Game.com",
+                "Tomb Raider",
+                "VTech - CreatiVision",
+                "VTech - V.Smile",
+                "Watara - Supervision"
             };
         }
     }

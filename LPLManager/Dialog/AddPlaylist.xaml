@@ -18,8 +18,5 @@
         <ComboBox x:Name="cmbPlaylists" Height="20" Width="300" Grid.Row="0" Grid.ColumnSpan="2" FontFamily="Microsoft Sans Serif" Padding="6,3,5,2" SelectionChanged="cmbPlaylists_SelectionChanged"/>
         <Button x:Name="btnOk" Content="Ok" Click="btnOk_Click" Width="50" Height="20" IsEnabled="False" Grid.Row="1" Grid.Column="0" FontFamily="Microsoft Sans Serif"/>
         <Button x:Name="btnCancel" Content="Cancel"  Click="btnCancel_Click" Width="50" Height="20" Grid.Row="1" Grid.Column="1" FontFamily="Microsoft Sans Serif"/>
-        <!--<ComboBox x:Name="cmbPlaylists" Margin="94,24,92,143" Height="25" Width="300"  />
-        <Button x:Name="btnOk" Content="Ok" Margin="278,107,138,59" Height="26" Width="70" Click="btnOk_Click" ></Button>
-        <Button x:Name="btnCancel" Content="Cancel" Margin="133,107,273,59" Height="26" Width="80" Click="btnCancel_Click"/>-->
     </Grid>
 </Window>

@@ -1,17 +1,6 @@
 ﻿using LPLManager.Controller;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace LPLManager.Dialog
 {
@@ -37,8 +26,13 @@ namespace LPLManager.Dialog
 
         private void btnOk_Click(object sender, RoutedEventArgs e)
         {
-            Controller.AddNewPlaylist(cmbPlaylists.Text);
-            Close();
+            if (!Controller.AddNewPlaylist(cmbPlaylists.Text))
+                MessageBox.Show("Error!\nPlaylist already exist");
+            else
+            {
+                MessageBox.Show("Playlist added!");
+                Close();
+            }
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
