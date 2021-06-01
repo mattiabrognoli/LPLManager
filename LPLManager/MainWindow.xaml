@@ -3,11 +3,22 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:LPLManager"
+        xmlns:viewModels="clr-namespace:LPLManager.ViewModel"
         mc:Ignorable="d"
-        Title="LPLManager" Height="450" Width="800" ResizeMode="NoResize" Background="#FFF1F1F1" Loaded="LPLManagerWindow_Loaded" WindowStartupLocation="CenterScreen">
-    <Grid>
-        <DockPanel>
+        Title="LPLManager" Height="500" Width="800" ResizeMode="NoResize" Background="#FFF1F1F1" Loaded="LPLManagerWindow_Loaded" WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <viewModels:MainWindowViewModel x:Key="ViewModel" />
+    </Window.Resources>
+    <Grid DataContext="{Binding Source={StaticResource ViewModel}}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="31" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <DockPanel Grid.Row="0" Grid.ColumnSpan="2">
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="_File">
                     <!--TODO-->
@@ -24,37 +35,65 @@
                 </MenuItem>
             </Menu>
         </DockPanel>
-        <ComboBox x:Name="cmbPlaylist" Width="248" HorizontalAlignment="Left" Margin="0,31,0,0" Height="20" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" FontFamily="Microsoft Sans Serif" FontSize="10.667" Padding="4" SelectionChanged="cmbPlaylist_SelectionChanged">
-            <ComboBox.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform Y="0"/>
-                </TransformGroup>
-            </ComboBox.RenderTransform>
-        </ComboBox>
-        <Button x:Name="btnRemoveLPL" Content="Remove" HorizontalAlignment="Left" Margin="290,31,0,0" VerticalAlignment="Top" Height="20" Width="60" IsEnabled="False" Click="btnRemoveLPL_Click"/>
-        <ListBox x:Name="listItems" Width="350" HorizontalAlignment="Left" Height="373" VerticalAlignment="Top" FontFamily="Microsoft Sans Serif" FontSize="10.667" Margin="0,51,0,0" SelectionChanged="listItems_SelectionChanged" IsSynchronizedWithCurrentItem="False"/>
-        <Label Content="Path" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="390,51,0,0" FontSize="10.667" FontFamily="Microsoft Sans Serif"></Label>
-        <Label x:Name="vldPath" Content="!" Foreground="Red" ToolTip="Path is mandatory" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="454,49,0,0" FontFamily="Microsoft Sans Serif" Visibility="Hidden" FontWeight="Bold"/>
-        <TextBox x:Name="txtPath" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="466,51,0,0" Width="245" Height="22" FontFamily="Microsoft Sans Serif" TextAlignment="Left" TextChanged="txtChangeEvent" TextWrapping="NoWrap" Padding="3"/>
-        <Button x:Name="btnSetPath" Content="..." VerticalAlignment="Top" HorizontalAlignment="Left" Margin="718,51,0,0" Width="24" Height="22" Click="btnSetPath_Click"></Button>
-        <Label Content="Label" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="390,81,0,0" FontSize="10.667" FontFamily="Microsoft Sans Serif"></Label>
-        <Label x:Name="vldLabel" Content="!" Foreground="Red" ToolTip="Label is mandatory" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="454,79,0,0" FontFamily="Microsoft Sans Serif" Visibility="Hidden" FontWeight="Bold"/>
-        <TextBox x:Name="txtLabel" VerticalAlignment="Top" Padding="3" HorizontalAlignment="Left" Margin="466,81,0,0" Width="245" Height="22" FontFamily="Microsoft Sans Serif" TextChanged="txtChangeEvent"></TextBox>
-        <Label Content="Core Path" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="390,111,0,0" FontSize="10.667" FontFamily="Microsoft Sans Serif"></Label>
-        <TextBox x:Name="txtCorePath" VerticalAlignment="Top" Padding="3" HorizontalAlignment="Left" Margin="466,111,0,0" Width="245" Height="22" FontFamily="Microsoft Sans Serif" TextChanged="txtChangeEvent"></TextBox>
-        <Button x:Name="btnSetCorePath" Content="..." VerticalAlignment="Top" HorizontalAlignment="Left" Margin="718,111,0,0" Width="24" Height="22" Click="btnSetCorePath_Click"></Button>
-        <Label Content="Core Name" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="390,141,0,0" FontSize="10.667" FontFamily="Microsoft Sans Serif"></Label>
-        <TextBox x:Name="txtCoreName" VerticalAlignment="Top" Padding="3" HorizontalAlignment="Left" Margin="466,141,0,0" Width="245" Height="22" FontFamily="Microsoft Sans Serif" TextChanged="txtChangeEvent"></TextBox>
-        <Label Content="Crc32" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="390,171,0,0" FontSize="10.667" FontFamily="Microsoft Sans Serif"></Label>
-        <TextBox x:Name="txtCrc32" VerticalAlignment="Top" Padding="3" HorizontalAlignment="Left" Margin="466,171,0,0" Width="245" Height="22" FontFamily="Microsoft Sans Serif" TextChanged="txtChangeEvent"></TextBox>
-        <Label Content="Db Name" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="390,201,0,0" FontSize="10.667" FontFamily="Microsoft Sans Serif"></Label>
-        <TextBox x:Name="txtDbName" VerticalAlignment="Top" Padding="3" HorizontalAlignment="Left" Margin="466,201,0,0" Width="245" Height="22" FontFamily="Microsoft Sans Serif" IsEnabled="False" TextChanged="txtChangeEvent"></TextBox>
-        <Button x:Name="btnRemove" Content="Remove" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="645,238,0,0" Width="60" Height="24" IsEnabled="False" Click="btnRemove_Click"></Button>
-        <Button x:Name="btnEdit" Content="Edit" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="710,238,0,0" Width="60" Height="24" IsEnabled="False" Click="btnEdit_Click"></Button>
-        <Button x:Name="btnAddItem" Content="Add Item" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="710,267,0,0" Width="60" Height="24" IsEnabled="False" Click="btnAddItem_Click"></Button>
-        <Image x:Name="picItem" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="466,242,0,0" Width="160" Height="160" Stretch="Uniform" RenderOptions.BitmapScalingMode="Fant" RenderOptions.EdgeMode="Aliased" MouseLeftButtonDown="picItem_MouseLeftButtonDown"/>
+        <Grid Grid.Row="1" Grid.Column="0" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="21" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <ComboBox Grid.Row="0" x:Name="cmbPlaylist" Width="248" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" FontFamily="Microsoft Sans Serif"
+                      FontSize="10.667" Padding="4" SelectionChanged="cmbPlaylist_SelectionChanged" SelectedItem="{Binding SelectedChoice, Mode=TwoWay}">
+                <ComboBox.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform Y="0"/>
+                    </TransformGroup>
+                </ComboBox.RenderTransform>
+            </ComboBox>
+            <Button Grid.Row="0" x:Name="btnRemoveLPL" Content="Remove" HorizontalAlignment="Right" VerticalAlignment="Top" Height="20" Width="60"  IsEnabled="False" Click="btnRemoveLPL_Click" Margin="0,0,20,0"/>
+            <ListBox Grid.Row="1" x:Name="listItems" HorizontalAlignment="Left" VerticalAlignment="Center" Height="411" Width="372" FontFamily="Microsoft Sans Serif" FontSize="10.667" SelectionChanged="listItems_SelectionChanged" IsSynchronizedWithCurrentItem="False"/>
+        </Grid>
+        <Grid Grid.Column="1" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="15" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="50" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="180" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            
+            <Label Content="Path" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0 0 0 0" FontSize="10.667" FontFamily="Microsoft Sans Serif"></Label>
+            <Label x:Name="vldPath" Grid.Column="1" Content="!" Foreground="Red" ToolTip="Path is mandatory" Margin="0 0 0 0" VerticalAlignment="Top" HorizontalAlignment="Left" FontFamily="Microsoft Sans Serif" Visibility="Hidden" FontWeight="Bold"/>
+            <TextBox x:Name="txtPath" Grid.Column="2" VerticalAlignment="Top" Height="22" Margin="0 0 0 0" FontFamily="Microsoft Sans Serif" TextAlignment="Left" TextChanged="txtChangeEvent" TextWrapping="NoWrap" Padding="3"/>
+            <Button x:Name="btnSetPath" Grid.Column="3" Content="..." VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5,0,0,0" Width="24" Height="22" Click="btnSetPath_Click"></Button>
+            
+            <Label Content="Label" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0 30 0 0" FontSize="10.667" FontFamily="Microsoft Sans Serif"></Label>
+            <Label x:Name="vldLabel" Grid.Column="1" Content="!" Foreground="Red" ToolTip="Label is mandatory" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0 30 0 0" FontFamily="Microsoft Sans Serif" Visibility="Hidden" FontWeight="Bold"/>
+            <TextBox x:Name="txtLabel" Grid.Column="2" VerticalAlignment="Top" Padding="3" Margin="0 30 0 0" Height="22" FontFamily="Microsoft Sans Serif" TextChanged="txtChangeEvent"></TextBox>
+            
+            <Label Content="Core Path" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0 60 0 0" FontSize="10.667" FontFamily="Microsoft Sans Serif"></Label>
+            <TextBox x:Name="txtCorePath" Grid.Column="2" VerticalAlignment="Top" Padding="3" Margin="0 60 0 0" Height="22" FontFamily="Microsoft Sans Serif" TextChanged="txtChangeEvent"></TextBox>
+            <Button x:Name="btnSetCorePath" Grid.Column="3" Content="..." VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5 60 0 0" Width="24" Height="22" Click="btnSetCorePath_Click"></Button>
+            
+            <Label Content="Core Name" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0 90 0 0" FontSize="10.667" FontFamily="Microsoft Sans Serif"></Label>
+            <TextBox x:Name="txtCoreName" Grid.Column="2" VerticalAlignment="Top" Padding="3" Margin="0 90 0 0" Height="22" FontFamily="Microsoft Sans Serif" TextChanged="txtChangeEvent"></TextBox>
+            
+            <Label Content="Crc32" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0 120 0 0" FontSize="10.667" FontFamily="Microsoft Sans Serif"></Label>
+            <TextBox x:Name="txtCrc32" Grid.Column="2" VerticalAlignment="Top" Padding="3" Margin="0 120 0 0" FontFamily="Microsoft Sans Serif" TextChanged="txtChangeEvent"></TextBox>
+            
+            <Label Content="Db Name" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0 150 0 0" FontSize="10.667" FontFamily="Microsoft Sans Serif"></Label>
+            <TextBox x:Name="txtDbName" Grid.Column="2" VerticalAlignment="Top" Padding="3" Margin="0 150 0 0" Height="22" FontFamily="Microsoft Sans Serif" IsEnabled="False" TextChanged="txtChangeEvent"></TextBox>
+            
+            <Button x:Name="btnRemove" Grid.Row="1" Grid.Column="2"  Content="Remove" VerticalAlignment="Top" HorizontalAlignment="Left" Width="60" Height="24" IsEnabled="False" Click="btnRemove_Click"></Button>
+            <Button x:Name="btnEdit" Grid.Row="1" Grid.Column="2"  Content="Edit" VerticalAlignment="Top" HorizontalAlignment="Center"  Width="60" Height="24" IsEnabled="False" Click="btnEdit_Click"></Button>
+            <Button x:Name="btnAddItem" Grid.Row="1" Grid.Column="2"  Content="Add Item" VerticalAlignment="Top" HorizontalAlignment="Right" Width="60" Height="24" IsEnabled="False" Click="btnAddItem_Click" ></Button>
+            <Image x:Name="picItem" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"  Stretch="Uniform" RenderOptions.BitmapScalingMode="Fant" RenderOptions.EdgeMode="Aliased" MouseLeftButtonDown="picItem_MouseLeftButtonDown" Margin="0,0,0,15"/>
+
+        </Grid>
     </Grid>
 </Window>
