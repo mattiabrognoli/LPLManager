@@ -66,13 +66,13 @@ namespace LPLManager.Controller
         public bool CompareCurrententItem(Item modified)
         {
             bool equal = false;
-            if (modified != null)
-                equal = modified.core_name == CurrentItem.core_name &
-                        modified.core_path == CurrentItem.core_path &
-                        modified.crc32 == CurrentItem.crc32 &
-                        modified.db_name == CurrentItem.db_name &
-                        modified.label == CurrentItem.label &
-                        modified.path == CurrentItem.path;
+            //if (modified != null)
+            //    equal = modified.core_name == CurrentItem.core_name &
+            //            modified.core_path == CurrentItem.core_path &
+            //            modified.crc32 == CurrentItem.crc32 &
+            //            modified.db_name == CurrentItem.db_name &
+            //            modified.label == CurrentItem.label &
+            //            modified.path == CurrentItem.path;
 
             return equal;
         }
