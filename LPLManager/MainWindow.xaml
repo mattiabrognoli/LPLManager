@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModels="clr-namespace:LPLManager.ViewModel"
         mc:Ignorable="d"
-        Title="LPLManager" Height="500" Width="800" ResizeMode="NoResize" Background="#FFF1F1F1" Loaded="LPLManagerWindow_Loaded" WindowStartupLocation="CenterScreen">
+        Title="LPLManager" Height="500" Width="800" ResizeMode="NoResize" Background="#FFF1F1F1" Loaded="LPLManagerWindow_Loaded" WindowStartupLocation="CenterOwner">
     <Window.Resources>
         <viewModels:MainWindowViewModel x:Key="ViewModel" />
     </Window.Resources>
@@ -24,7 +24,7 @@
                 <MenuItem Header="_File">
                     <MenuItem Header="_New" Click="MenuItemNew_Click"  />
                     <MenuItem Header="_Open" Click="MenuItemOpen_Click" />
-                    <MenuItem Header="_Reset" Click="MenuItemReset_Click" />
+                    <MenuItem Header="_Reset" Command="{Binding ResetCommand}" />
                     <Separator />
                     <MenuItem Header="_Exit" Click="MenuItemExit_Click" />
                 </MenuItem>
@@ -40,11 +40,11 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <ComboBox Grid.Row="0" x:Name="cmbPlaylist" Width="248" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" FontFamily="Microsoft Sans Serif"
-                      FontSize="10.667" Padding="4"  ItemsSource="{Binding PlaylistName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedChoice, Mode=OneWayToSource}" />
+                      FontSize="10.667" Padding="4"  ItemsSource="{Binding PlaylistName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedChoice}" SelectedIndex="{Binding CurrentCbIndex}" />
             <!--SelectionChanged="cmbPlaylist_SelectionChanged"-->
-            <Button Grid.Row="0" x:Name="btnRemoveLPL" Content="Remove" HorizontalAlignment="Right" VerticalAlignment="Top" Height="20" Width="60"  IsEnabled="False" Click="btnRemoveLPL_Click" Margin="0,0,20,0"/>
-            <ListBox Grid.Row="1" x:Name="listItems" ItemsSource="{Binding SourceItems, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding CurrentItem}" HorizontalAlignment="Left" VerticalAlignment="Center" Height="411" Width="372"
-                     FontFamily="Microsoft Sans Serif" FontSize="10.667" IsSynchronizedWithCurrentItem="False" >
+            <Button Grid.Row="0" x:Name="btnRemoveLPL" Content="Remove" HorizontalAlignment="Right" VerticalAlignment="Top" Height="20" Width="60"  IsEnabled="{Binding IsRemoveDbEnabled, UpdateSourceTrigger=PropertyChanged}" Click="btnRemoveLPL_Click" Margin="0,0,20,0"/>
+            <ListBox Grid.Row="1" x:Name="listItems" ItemsSource="{Binding SourceItems, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding CurrentItem}" SelectedIndex="{Binding CurrentItemIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" VerticalAlignment="Center" Height="411" Width="372"
+                     FontFamily="Microsoft Sans Serif" FontSize="10.667" >
                 <!--SelectionChanged="listItems_SelectionChanged"-->
                 <ListBox.ItemTemplate>
                     <DataTemplate>
@@ -119,7 +119,7 @@
             <TextBox x:Name="txtDbName" Grid.Column="2" VerticalAlignment="Top" Padding="3" Margin="0 150 0 0" Height="22" FontFamily="Microsoft Sans Serif" IsEnabled="False" Text="{Binding TempItem.db_name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ></TextBox>
 
             <Button x:Name="btnRemove" Grid.Row="1" Grid.Column="2"  Content="Remove" VerticalAlignment="Top" HorizontalAlignment="Left" Width="60" Height="24" IsEnabled="False" Click="btnRemove_Click"></Button>
-            <Button x:Name="btnEdit" Grid.Row="1" Grid.Column="2"  Content="Edit" VerticalAlignment="Top" HorizontalAlignment="Center"  Width="60" Height="24" IsEnabled="{Binding IsInEdit, UpdateSourceTrigger=PropertyChanged}" Click="btnEdit_Click"></Button>
+            <Button x:Name="btnEdit" Grid.Row="1" Grid.Column="2"  Content="Edit" VerticalAlignment="Top" HorizontalAlignment="Center"  Width="60" Height="24" IsEnabled="{Binding IsInEdit, UpdateSourceTrigger=PropertyChanged}" Command="{Binding EditCommand}"></Button>
             <Button x:Name="btnAddItem" Grid.Row="1" Grid.Column="2"  Content="Add Item" VerticalAlignment="Top" HorizontalAlignment="Right" Width="60" Height="24" IsEnabled="False" Click="btnAddItem_Click" ></Button>
             <Image x:Name="picItem" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"  Stretch="Uniform" RenderOptions.BitmapScalingMode="Fant" RenderOptions.EdgeMode="Aliased" MouseLeftButtonDown="picItem_MouseLeftButtonDown" Margin="0,0,0,15"/>
 

@@ -112,37 +112,37 @@ namespace LPLManager
 
         private void ChangeEnabledTextBox(bool choice)
         {
-            txtPath.IsEnabled =
-            txtLabel.IsEnabled =
-            txtCorePath.IsEnabled =
-            txtCoreName.IsEnabled =
-            txtCrc32.IsEnabled =
-            btnSetPath.IsEnabled =
-            btnSetCorePath.IsEnabled = choice;
+            //txtPath.IsEnabled =
+            //txtLabel.IsEnabled =
+            //txtCorePath.IsEnabled =
+            //txtCoreName.IsEnabled =
+            //txtCrc32.IsEnabled =
+            //btnSetPath.IsEnabled =
+            //btnSetCorePath.IsEnabled = choice;
         }
 
         private void ClearItem()
         {
-            txtPath.Text =
-            txtLabel.Text =
-            txtCorePath.Text =
-            txtCoreName.Text =
-            txtCrc32.Text =
-            txtDbName.Text = string.Empty;
+            //txtPath.Text =
+            //txtLabel.Text =
+            //txtCorePath.Text =
+            //txtCoreName.Text =
+            //txtCrc32.Text =
+            //txtDbName.Text = string.Empty;
 
-            txtPath.IsEnabled =
-            txtLabel.IsEnabled =
-            txtCorePath.IsEnabled =
-            txtCoreName.IsEnabled =
-            txtCrc32.IsEnabled =
-            txtDbName.IsEnabled =
-            btnRemove.IsEnabled =
-            btnEdit.IsEnabled =
-            btnSetPath.IsEnabled =
-            btnSetCorePath.IsEnabled =
-            btnAddItem.IsEnabled = false;
+            //txtPath.IsEnabled =
+            //txtLabel.IsEnabled =
+            //txtCorePath.IsEnabled =
+            //txtCoreName.IsEnabled =
+            //txtCrc32.IsEnabled =
+            //txtDbName.IsEnabled =
+            //btnRemove.IsEnabled =
+            //btnEdit.IsEnabled =
+            //btnSetPath.IsEnabled =
+            //btnSetCorePath.IsEnabled =
+            //btnAddItem.IsEnabled = false;
 
-            picItem.Source = null;
+            //picItem.Source = null;
         }
 
         private void loadingInfo(Item currentItem)
@@ -187,18 +187,18 @@ namespace LPLManager
 
         private void listItems_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (listItems.SelectedIndex != -1 && !string.IsNullOrEmpty((listItems.SelectedItem as Item).label))
-            {
-                Item current = Controller.Model.Playlists[Controller.CurrentDatabase].items.SingleOrDefault(i => i.id == (listItems.SelectedItem as Item).id);
-                if (current != null)
-                {
-                    btnRemove.IsEnabled = true;
-                    ChangeEnabledTextBox(true);
-                    Controller.CurrentItem = current;
-                    loadingInfo(current);
-                    loadingImage(current.label, cmbPlaylist.SelectedItem as string);
-                }
-            }
+            //if (listItems.SelectedIndex != -1 && !string.IsNullOrEmpty((listItems.SelectedItem as Item).label))
+            //{
+            //    Item current = Controller.Model.Playlists[Controller.CurrentDatabase].items.SingleOrDefault(i => i.id == (listItems.SelectedItem as Item).id);
+            //    if (current != null)
+            //    {
+            //        btnRemove.IsEnabled = true;
+            //        ChangeEnabledTextBox(true);
+            //        Controller.CurrentItem = current;
+            //        loadingInfo(current);
+            //        loadingImage(current.label, cmbPlaylist.SelectedItem as string);
+            //    }
+            //}
         }
 
         private void txtChangeEvent(object sender, TextChangedEventArgs e)
@@ -452,11 +452,6 @@ namespace LPLManager
         private void MenuItemHelp_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show(this, "Put the exe file in the retroarch root and start it.\nThen you can add, edit and remove LPL retroarch playlists.");
-        }
-
-        private void test(object sender, TextChangedEventArgs e)
-        {
-
         }
     }
 }
