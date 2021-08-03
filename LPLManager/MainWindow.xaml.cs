@@ -2,7 +2,6 @@
 using LPLManager.Dialog;
 using LPLManager.FileManager;
 using LPLManager.Object;
-using LPLManager.Uility;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
@@ -40,7 +39,6 @@ namespace LPLManager
         public MainWindow()
         {
             InitializeComponent();
-            Context.mainWindow = this;
         }
 
         private void LPLManagerWindow_Loaded(object sender, RoutedEventArgs e)
@@ -74,8 +72,8 @@ namespace LPLManager
             txtDbName.Text = "";
             //ChangeEnabledTextBox(false);
             //btnEdit.IsEnabled = false;
-            //btnRemove.IsEnabled = false;
-            //btnAddItem.IsEnabled = false;
+            btnRemove.IsEnabled = false;
+            btnAddItem.IsEnabled = false;
             Controller.isCustom = false;
         }
 
@@ -84,7 +82,7 @@ namespace LPLManager
             //ClearItem();
             if (!string.IsNullOrEmpty(cmbPlaylist.SelectedItem as string))
             {
-                //btnAddItem.IsEnabled = btnRemoveLPL.IsEnabled = true;
+                btnAddItem.IsEnabled = btnRemoveLPL.IsEnabled = true;
                 Controller.CurrentDatabase = cmbPlaylist.SelectedItem as string;
                 
                 //listItems.ItemsSource = Controller.Model.Playlists[cmbPlaylist.SelectedItem as string].items;
@@ -94,7 +92,7 @@ namespace LPLManager
             }
             else
             {
-                //btnAddItem.IsEnabled = btnRemoveLPL.IsEnabled = false;
+                btnAddItem.IsEnabled = btnRemoveLPL.IsEnabled = false;
                 listItems.ItemsSource = new List<Item>();
             }
         }
