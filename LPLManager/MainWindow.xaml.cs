@@ -54,24 +54,24 @@ namespace LPLManager
 
         private void LoadPlaylist()
         {
-            //cmbPlaylist.BeginInit();
-            //cmbPlaylist.Items.Clear();
-            //Controller.Model.Playlists.Keys.ToList().ForEach(k => cmbPlaylist.Items.Add(k));
-            //cmbPlaylist.EndInit();
+            cmbPlaylist.BeginInit();
+            cmbPlaylist.Items.Clear();
+            Controller.Model.Playlists.Keys.ToList().ForEach(k => cmbPlaylist.Items.Add(k));
+            cmbPlaylist.EndInit();
         }
 
         private void ResetControls()
         {
             listItems.ItemsSource = new List<Item>();
-            //cmbPlaylist.Items.Clear();
+            cmbPlaylist.Items.Clear();
             txtPath.Text = "";
             txtLabel.Text = "";
             txtCorePath.Text = "";
             txtCoreName.Text = "";
             txtCrc32.Text = "";
             txtDbName.Text = "";
-            //ChangeEnabledTextBox(false);
-            //btnEdit.IsEnabled = false;
+            ChangeEnabledTextBox(false);
+            btnEdit.IsEnabled = false;
             btnRemove.IsEnabled = false;
             btnAddItem.IsEnabled = false;
             Controller.isCustom = false;
@@ -79,21 +79,25 @@ namespace LPLManager
 
         private void cmbPlaylist_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //ClearItem();
+            ClearItem();
             if (!string.IsNullOrEmpty(cmbPlaylist.SelectedItem as string))
             {
                 btnAddItem.IsEnabled = btnRemoveLPL.IsEnabled = true;
                 Controller.CurrentDatabase = cmbPlaylist.SelectedItem as string;
-                
-                //listItems.ItemsSource = Controller.Model.Playlists[cmbPlaylist.SelectedItem as string].items;
-
+                listItems.BeginInit();
+                listItems.ItemsSource = Controller.Model.Playlists[cmbPlaylist.SelectedItem as string].items;
+                listItems.DisplayMemberPath = "label";
+                listItems.SelectedValuePath = "id";
+                listItems.EndInit();
                 if (sender is Button && (sender as Button).Name == "btnEdit")
                     listItems.SelectedIndex = Controller.CurrentIndex;
             }
             else
             {
                 btnAddItem.IsEnabled = btnRemoveLPL.IsEnabled = false;
+                listItems.BeginInit();
                 listItems.ItemsSource = new List<Item>();
+                listItems.EndInit();
             }
         }
 
@@ -203,23 +207,23 @@ namespace LPLManager
 
         private void txtChangeEvent(object sender, TextChangedEventArgs e)
         {
-            //if ((sender as TextBox).Name == "txtPath")
-            //    vldPath.Visibility = Visibility.Hidden;
+            if ((sender as TextBox).Name == "txtPath")
+                vldPath.Visibility = Visibility.Hidden;
 
-            //if ((sender as TextBox).Name == "txtLabel")
-            //    vldLabel.Visibility = Visibility.Hidden;
+            if ((sender as TextBox).Name == "txtLabel")
+                vldLabel.Visibility = Visibility.Hidden;
 
-            //Item actualItem = new Item()
-            //{
-            //    core_name = txtCoreName.Text,
-            //    core_path = txtCorePath.Text,
-            //    crc32 = txtCrc32.Text,
-            //    db_name = txtDbName.Text,
-            //    label = txtLabel.Text,
-            //    path = txtPath.Text
-            //};
+            Item actualItem = new Item()
+            {
+                core_name = txtCoreName.Text,
+                core_path = txtCorePath.Text,
+                crc32 = txtCrc32.Text,
+                db_name = txtDbName.Text,
+                label = txtLabel.Text,
+                path = txtPath.Text
+            };
 
-            //btnEdit.IsEnabled = !Controller.CompareCurrententItem(actualItem);
+            btnEdit.IsEnabled = !Controller.CompareCurrententItem(actualItem);
         }
 
         #region [SAVE EVENTS]
@@ -452,11 +456,6 @@ namespace LPLManager
         private void MenuItemHelp_Click(object sender, RoutedEventArgs e)
         {
             MessageBox.Show(this, "Put the exe file in the retroarch root and start it.\nThen you can add, edit and remove LPL retroarch playlists.");
-        }
-
-        private void test(object sender, TextChangedEventArgs e)
-        {
-
         }
     }
 }
