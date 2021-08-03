@@ -15,20 +15,6 @@ namespace LPLManager.Object
         public string core_name { get; set; }
         public string crc32 { get; set; }
         public string db_name { get; set; }
-
-        public Item Clone()
-        {
-            return new Item()
-            {
-                id = id,
-                path = path,
-                label = label,
-                core_path = core_path,
-                core_name = core_name,
-                crc32 = crc32,
-                db_name = db_name
-            };
-        }
     }
 
     public class Root
