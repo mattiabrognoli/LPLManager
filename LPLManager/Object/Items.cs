@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LPLManager.Object
 {
-    public class Item
+    public class Item : ICloneable
     {
         public int id;
         public string path { get; set; }
@@ -15,6 +15,31 @@ namespace LPLManager.Object
         public string core_name { get; set; }
         public string crc32 { get; set; }
         public string db_name { get; set; }
+
+        public object Clone()
+        {
+            return new Item()
+            {
+                id = id,
+                path = path,
+                label = label,
+                core_path = core_path,
+                core_name = core_name,
+                crc32 = crc32,
+                db_name = db_name
+            };
+        }
+
+        public bool Compare(Item itemToCompare)
+        {
+            return  id == itemToCompare.id &&
+                    path == itemToCompare.path &&
+                    label == itemToCompare.label &&
+                    core_path == itemToCompare.core_path &&
+                    core_name == itemToCompare.core_name &&
+                    crc32 == itemToCompare.crc32 &&
+                    db_name == itemToCompare.db_name;
+        }
     }
 
     public class Root

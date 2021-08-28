@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LPLManager.ViewModel
 {
-    public class ViewModelBase
+    public class ViewModelBase : INotifyPropertyChanged
     {
         // In ViewModelBase.cs
         public event PropertyChangedEventHandler PropertyChanged;

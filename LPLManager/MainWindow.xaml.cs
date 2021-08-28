@@ -54,16 +54,16 @@ namespace LPLManager
 
         private void LoadPlaylist()
         {
-            cmbPlaylist.BeginInit();
-            cmbPlaylist.Items.Clear();
-            Controller.Model.Playlists.Keys.ToList().ForEach(k => cmbPlaylist.Items.Add(k));
-            cmbPlaylist.EndInit();
+            //cmbPlaylist.BeginInit();
+            //cmbPlaylist.Items.Clear();
+            //Controller.Model.Playlists.Keys.ToList().ForEach(k => cmbPlaylist.Items.Add(k));
+            //cmbPlaylist.EndInit();
         }
 
         private void ResetControls()
         {
             listItems.ItemsSource = new List<Item>();
-            cmbPlaylist.Items.Clear();
+            //cmbPlaylist.Items.Clear();
             txtPath.Text = "";
             txtLabel.Text = "";
             txtCorePath.Text = "";
@@ -200,7 +200,7 @@ namespace LPLManager
                     ChangeEnabledTextBox(true);
                     Controller.CurrentItem = current;
                     loadingInfo(current);
-                    loadingImage(current.label, cmbPlaylist.SelectedItem as string);
+                    //loadingImage(current.label, cmbPlaylist.SelectedItem as string);
                 }
             }
         }
@@ -424,7 +424,7 @@ namespace LPLManager
                     ResetControls();
                     Controller.LoadCustomDatabase(openFileDialogImage.FileName);
                     LoadPlaylist();
-                    cmbPlaylist.SelectedIndex = 0;
+                    //cmbPlaylist.SelectedIndex = 0;
                 }
                 catch (Exception ex)
                 {

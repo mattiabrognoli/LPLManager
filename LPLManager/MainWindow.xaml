@@ -41,7 +41,7 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <ComboBox Grid.Row="0" x:Name="cmbPlaylist" Width="248" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" FontFamily="Microsoft Sans Serif"
-                      FontSize="10.667" Padding="4" SelectionChanged="cmbPlaylist_SelectionChanged" SelectedItem="{Binding SelectedChoice, Mode=TwoWay}">
+                      FontSize="10.667" Padding="4" ItemsSource="{Binding DatabaseNames, Mode=TwoWay}" SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}" SelectedItem="{Binding SelectedDatabase, Mode=OneWay}">
                 <ComboBox.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -52,7 +52,8 @@
                 </ComboBox.RenderTransform>
             </ComboBox>
             <Button Grid.Row="0" x:Name="btnRemoveLPL" Content="Remove" HorizontalAlignment="Right" VerticalAlignment="Top" Height="20" Width="60"  IsEnabled="False" Click="btnRemoveLPL_Click" Margin="0,0,20,0"/>
-            <ListBox Grid.Row="1" x:Name="listItems" HorizontalAlignment="Left" VerticalAlignment="Center" Height="411" Width="372" FontFamily="Microsoft Sans Serif" FontSize="10.667" SelectionChanged="listItems_SelectionChanged" IsSynchronizedWithCurrentItem="False"/>
+            <ListBox Grid.Row="1" x:Name="listItems" HorizontalAlignment="Left" VerticalAlignment="Center" Height="411" Width="372" FontFamily="Microsoft Sans Serif" FontSize="10.667" DisplayMemberPath="label"
+                     ItemsSource="{Binding ItemsList, Mode=TwoWay}" SelectedItem="{Binding SelectedItem, Mode=OneWay}"  SelectedIndex="{Binding SelectedIndexItem, Mode=TwoWay}" />
         </Grid>
         <Grid Grid.Column="1" Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -69,7 +70,7 @@
             
             <Label Content="Path" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0 0 0 0" FontSize="10.667" FontFamily="Microsoft Sans Serif"></Label>
             <Label x:Name="vldPath" Grid.Column="1" Content="!" Foreground="Red" ToolTip="Path is mandatory" Margin="0 0 0 0" VerticalAlignment="Top" HorizontalAlignment="Left" FontFamily="Microsoft Sans Serif" Visibility="Hidden" FontWeight="Bold"/>
-            <TextBox x:Name="txtPath" Grid.Column="2" VerticalAlignment="Top" Height="22" Margin="0 0 0 0" FontFamily="Microsoft Sans Serif" TextAlignment="Left" TextChanged="txtChangeEvent" TextWrapping="NoWrap" Padding="3"/>
+            <TextBox x:Name="txtPath" Grid.Column="2" VerticalAlignment="Top" Height="22" Margin="0 0 0 0" FontFamily="Microsoft Sans Serif" TextAlignment="Left" Text="{Binding TempItem.path, Mode=TwoWay}" IsEnabled="{Binding TextBoxCanBeEnabled, Mode=OneTime}" TextWrapping="NoWrap" Padding="3"/>
             <Button x:Name="btnSetPath" Grid.Column="3" Content="..." VerticalAlignment="Top" HorizontalAlignment="Left" Margin="5,0,0,0" Width="24" Height="22" Click="btnSetPath_Click"></Button>
             
             <Label Content="Label" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0 30 0 0" FontSize="10.667" FontFamily="Microsoft Sans Serif"></Label>
@@ -90,7 +91,7 @@
             <TextBox x:Name="txtDbName" Grid.Column="2" VerticalAlignment="Top" Padding="3" Margin="0 150 0 0" Height="22" FontFamily="Microsoft Sans Serif" IsEnabled="False" TextChanged="txtChangeEvent"></TextBox>
             
             <Button x:Name="btnRemove" Grid.Row="1" Grid.Column="2"  Content="Remove" VerticalAlignment="Top" HorizontalAlignment="Left" Width="60" Height="24" IsEnabled="False" Click="btnRemove_Click"></Button>
-            <Button x:Name="btnEdit" Grid.Row="1" Grid.Column="2"  Content="Edit" VerticalAlignment="Top" HorizontalAlignment="Center"  Width="60" Height="24" IsEnabled="False" Click="btnEdit_Click"></Button>
+            <Button x:Name="btnEdit" Grid.Row="1" Grid.Column="2"  Content="Edit" VerticalAlignment="Top" HorizontalAlignment="Center"  Width="60" Height="24" IsEnabled="{Binding EditCanBeEnable, Mode=OneTime}" Click="btnEdit_Click"></Button>
             <Button x:Name="btnAddItem" Grid.Row="1" Grid.Column="2"  Content="Add Item" VerticalAlignment="Top" HorizontalAlignment="Right" Width="60" Height="24" IsEnabled="False" Click="btnAddItem_Click" ></Button>
             <Image x:Name="picItem" Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center" VerticalAlignment="Center"  Stretch="Uniform" RenderOptions.BitmapScalingMode="Fant" RenderOptions.EdgeMode="Aliased" MouseLeftButtonDown="picItem_MouseLeftButtonDown" Margin="0,0,0,15"/>
 
